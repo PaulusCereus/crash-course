@@ -96,3 +96,9 @@ git branch new_branch
 ```bash
 git checkout new_branch
 ```
+
+# Обязательные пункты работы с git
+
+1. Добавить/изменить файлы
+2. Написать команду `git add filename1 filename2` для отслеживания файлов
+3. Прописать команду `git commit -m "message of commit"`
