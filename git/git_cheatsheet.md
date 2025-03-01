@@ -76,3 +76,23 @@ git push -u origin master
 # Стягиваем (скачиваем) изменения ветки master с удаленного репозитория origin
 git pull origin master
 ```
+
+# Работа с ветками
+
+## Как проверить какие ветки существуют в текущем репозитории
+
+```bash
+git branch
+```
+
+## Как создать новую ветку
+
+```bash
+git branch new_branch
+```
+
+## Как поменять ветку
+
+```bash
+git checkout new_branch
+```
