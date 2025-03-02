@@ -55,3 +55,24 @@ with open("./json/data.json", "r") as file:
 print(data)
 print(data["skills"])
 print(data["name"])
+
+# Запись данных в JSON файл
+# ----------------------------------------------------------------------
+
+# Формируем словарь данных с некоторыми значениями
+data = {
+    "name": "SolGryn",
+    "age": 52,
+    "hobbies": [
+        "Main Pilot",
+        "Devil Breaker",
+        "Tier 1 Speedrunner",
+        "Pyaterochka Cashier",
+        "Cookie Clicker"
+    ],
+}
+
+# Открываем файл на запись. Если его не сущетсвует, то файл будет создан
+# Внутрь файла записываем содержимое в виде строки с отступом в 4 символа 
+with open("./json/output.json", "w") as file:
+    json.dump(data, file, indent=4)
