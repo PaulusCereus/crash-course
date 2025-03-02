@@ -11,3 +11,19 @@ JSON (JavaScript Onject Notation) - формат обмена данными, к
 Часто JSON-файлы используются для хранения настроек, конфигураций и другой информации.
 3. Простота
 Легко читается человеком и обрабатывается программой.
+
+# Пример JSON
+
+```json
+{
+    "name": "Alice",
+    "age": 25,
+    "is_student": false,
+    "skills": ["Python", "HTML/CSS/JS", "SQL"],
+    "address": {
+        "city": "Moscow",
+        "house": 763,
+        "street": "Some street"
+    }
+}
+```
