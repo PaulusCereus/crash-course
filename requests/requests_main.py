@@ -64,3 +64,26 @@ def get_joke_by_type(url, joke_type):
         return None
     # Возвращаем первую шутку из ответа в формате JSON (предполагаем, что ответ — это список)
     return response.json()[0]
+
+def display_joke(joke):
+    """
+    Функция для отображения шутки в консоли.
+
+    Эта функция выводит в консоль текст шутки, состоящий из двух частей: 'setup' и 'punchline'.
+    Предполагается, что входной параметр `joke` — это словарь, содержащий шутку с полями "setup" (вопрос) и "punchline" (ответ).
+
+    Параметры:
+    - joke: dict — словарь с шуткой, содержащий по крайней мере два ключа: 'setup' и 'punchline'.
+
+    Возвращаемое значение:
+    - None — функция ничего не возвращает, она только выводит данные в консоль.
+
+    Пример:
+    >>> display_joke({'setup': 'Why do programmers prefer dark mode?', 'punchline': 'Because light attracts bugs.'})
+    Сетап: Why do programmers prefer dark mode?
+    Панчлайн: Because light attracts bugs.
+    """
+    # Выводим сетап шутки
+    print(f"\nСетап: {joke['setup']}")
+    # Выводим панчлайн шутки
+    print(f"Панчлайн: {joke['punchline']}\n")
