@@ -30,3 +30,37 @@ def get_joke_types(url):
         return []
     # Возвращаем ответ в формате JSON, который содержит список типов шуток
     return response.json()
+
+def get_joke_by_type(url, joke_type):
+    """
+    Функция для получения случайной шутки по выбранному типу.
+
+    Эта функция отправляет GET-запрос к API для получения случайной шутки по указанному типу.
+    Если запрос успешен, возвращает первый элемент из списка шуток в формате JSON, который содержит ключи "setup" и "punchline".
+    В случае ошибки или если запрос не вернул данные, функция возвращает `None`.
+
+    Параметры:
+    - url: str — базовый URL API, к которому добавляется конечная часть для получения случайной шутки.
+    - joke_type: str — тип шутки, выбранный пользователем, например, 'programming', 'general' и т.д.
+
+    Возвращаемое значение:
+    - dict или None:
+      - Если запрос успешен, возвращается словарь, представляющий шутку, с полями "setup" (вопрос) и "punchline" (ответ).
+      - Если запрос не удался или произошла ошибка, возвращается `None`.
+
+    Пример:
+    >>> get_joke_by_type("https://official-joke-api.appspot.com/", "programming")
+    {'setup': 'Why do programmers prefer dark mode?', 'punchline': 'Because light attracts bugs.'}
+    >>> get_joke_by_type("https://official-joke-api.appspot.com/", "nonexistent")
+    None
+    """
+    # Отправляем GET-запрос для получения случайной шутки по типу
+    response = requests.get(f"{url}jokes/{joke_type}/random")
+        # Если статус-код ответа не 200 (ОК)
+    if response.status_code != 200:
+        # Выводим ошибку, если запрос не успешен
+        print("Ошибка при получении шутки!")
+        # Возвращаем None в случае ошибки
+        return None
+    # Возвращаем первую шутку из ответа в формате JSON (предполагаем, что ответ — это список)
+    return response.json()[0]
