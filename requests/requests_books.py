@@ -28,3 +28,33 @@ def get_books_data(query="", num_results=5):
     except requests.exceptions.RequestException as e:
         # В случае ошибки запроса, выводим сообщение и возвращаем словарь с ошибкой
         return {"error": f"Ошибка при запросе: {e}"}
+
+def extract_books_info(data):
+    """
+    Извлекает информацию о книгах из данных, полученных от Google Books API.
+    Обрабатывает данные в формате JSON и извлекает важную информацию о книгах.
+
+    Параметры:
+    data (dict): Данные, полученные от Google Books API в формате JSON.
+    
+    Возвращает:
+    list: Список кортежей, каждый из которых содержит информацию о книге:
+          (название, авторы, дата публикации, описание книги).
+    Если в данных нет нужной информации, возвращаются значения по умолчанию.
+    """
+    books_info = []
+    # Извлекаем все книги из данных
+    for item in data.get('items', []):
+        volume_info = item.get('volumeInfo', {})
+        
+        # Безопасно извлекаем информацию о книге, используя get()
+        title = volume_info.get('title', 'Неизвестно')
+        authors = ', '.join(volume_info.get('authors', ['Неизвестен автор']))
+        published_date = volume_info.get('publishedDate', 'Неизвестна дата')
+        description = volume_info.get('description', 'Описание отсутствует')
+        
+        # Добавляем информацию о книге в список
+        books_info.append((title, authors, published_date, description))
+    
+    # Возвращаем список информации о книгах
+    return books_info
