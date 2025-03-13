@@ -117,3 +117,7 @@ def main():
         table = create_books_table(books_info)
         # Выводим таблицу
         print(table)
+
+if __name__ == "__main__":
+    # Запускаем основную программу
+    main()
