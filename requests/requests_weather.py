@@ -28,3 +28,42 @@ def get_api_key(filename="requests/config.ini"):
     
     # Возвращаем считанный API-ключ
     return my_api_key
+
+def get_weather_data(city="Moscow", api_key=""):
+    """
+    Получает данные о погоде для указанного города, отправляя запрос к OpenWeather API.
+
+    В случае, если API-ключ не передан, функция автоматически загрузит его из конфигурационного файла.
+    
+    Параметры:
+    city (str): Название города, для которого нужно получить данные о погоде.
+                По умолчанию используется "Moscow". Название города чувствительно к регистру.
+    api_key (str): API-ключ для подключения к OpenWeather API. Если ключ не передан, 
+                   будет загружен из конфигурационного файла.
+
+    Возвращает:
+    dict или None: Если запрос успешен, возвращает данные о погоде в формате JSON.
+                   Если возникла ошибка при запросе (например, неверный город или проблемы с API), 
+                   возвращает None.
+    """
+    # Если API-ключ не был передан, загружаем его из конфигурации
+    if api_key == "":
+        api_key = get_api_key()
+
+    # Формируем URL для запроса к OpenWeather API, добавляем параметры: город, ключ и единицы измерения
+    url = f"https://api.openweathermap.org/data/2.5/weather"
+    params = {"q": city, "appid": api_key, "units": "metric", "lang": "ru"}
+    try:
+        # Выполняем HTTP-запрос к OpenWeather API
+        response = requests.get(url=url, params=params)
+        
+        # Проверяем статус ответа. Если статус не 200, будет выброшено исключение.
+        response.raise_for_status()
+
+        # Если запрос прошел успешно, возвращаем данные в формате JSON
+        return response.json()
+
+    except requests.exceptions.RequestException as e:
+        # В случае ошибки при запросе выводим сообщение и возвращаем None
+        print(f"Ошибка при запросе к API: {e}")
+        return None
