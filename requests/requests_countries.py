@@ -55,3 +55,26 @@ def extract_country_info(data):
 
     # Возвращаем информацию о стране как кортеж
     return (name, capital, region, population, languages, flag)
+
+def get_country_info_table(country_info):
+    """
+    Создает таблицу с информацией о стране с использованием библиотеки PrettyTable.
+    
+    Параметры:
+    country_info (tuple): Кортеж с данными о стране (название, столица, регион, 
+                           население, языки, флаг).
+    
+    Возвращает:
+    PrettyTable: Объект таблицы PrettyTable, который содержит информацию о стране.
+    """
+    # Создаем объект таблицы
+    table = PrettyTable()
+    
+    # Устанавливаем заголовки столбцов
+    table.field_names = ['Страна', 'Столица', 'Регион', 'Население', 'Языки', 'Флаг']
+    
+    # Добавляем строку с данными о стране
+    table.add_row(country_info)
+
+    # Возвращаем готовую таблицу
+    return table
