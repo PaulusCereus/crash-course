@@ -74,3 +74,20 @@ class MyConfig:
         else:
             print("Конфигурационный файл не был загружен.")
         return None
+
+    def get_cake_url(self):
+        """
+        Извлечь значение для ключа 'cake_url' из секции 'Urls' конфигурационного файла.
+
+        Возвращает:
+        str: Значение, ассоциированное с ключом 'cake_url' в секции 'Urls'.
+             В случае отсутствия ключа вызовет ошибку.
+        """
+        if self.is_file_loaded():
+            try:
+                return self.get_config().get("Urls", "cake_url")
+            except (configparser.NoSectionError, configparser.NoOptionError) as e:
+                print(f"Ошибка при извлечении cake_url: {e}")
+        else:
+            print("Конфигурационный файл не был загружен.")
+        return None
