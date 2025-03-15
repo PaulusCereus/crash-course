@@ -57,3 +57,20 @@ class MyConfig:
         bool: True, если файл был успешно считан, иначе False.
         """
         return self.__file_loaded
+
+    def get_user_agent(self):
+        """
+        Извлечь значение для ключа 'user_agent' из секции 'Requests' конфигурационного файла.
+
+        Возвращает:
+        str: Значение, ассоциированное с ключом 'user_agent' в секции 'Requests'.
+             В случае отсутствия ключа вызовет ошибку.
+        """
+        if self.is_file_loaded():
+            try:
+                return self.get_config().get("Requests", "user_agent")
+            except (configparser.NoSectionError, configparser.NoOptionError) as e:
+                print(f"Ошибка при извлечении user_agent: {e}")
+        else:
+            print("Конфигурационный файл не был загружен.")
+        return None
