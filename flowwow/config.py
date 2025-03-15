@@ -48,3 +48,12 @@ class MyConfig:
         ConfigParser: Объект конфигурации для работы с секциями и значениями.
         """
         return self.__config
+
+    def is_file_loaded(self):
+        """
+        Проверить, был ли успешно считан конфигурационный файл.
+
+        Возвращает:
+        bool: True, если файл был успешно считан, иначе False.
+        """
+        return self.__file_loaded
