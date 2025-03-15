@@ -30,3 +30,12 @@ class MyConfig:
         str: Имя конфигурационного файла.
         """
         return self.__filename
+
+    def get_filename(self):
+        """
+        Получить имя конфигурационного файла.
+
+        Возвращает:
+        str: Имя конфигурационного файла.
+        """
+        return self.__filename
