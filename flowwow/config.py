@@ -111,3 +111,23 @@ class MyConfig:
             except Exception as e:
                 print(f"Ошибка при чтении конфигурационного файла: {e}")
                 self.__file_loaded = False  # Устанавливаем флаг в False, если файл не был считан
+
+if __name__ == "__main__":
+    """
+    Основная функция для тестирования работы с конфигурационным файлом.
+    
+    Создает экземпляр класса MyConfig, пытается прочитать конфигурационный файл и 
+    извлекает некоторые значения из секций 'Requests' и 'Urls'.
+    """
+    # Создаем объект конфигурации
+    conf = MyConfig()
+
+    # Выводим значение 'cake_url', если оно было успешно считано
+    cake_url = conf.get_cake_url()
+    if cake_url:
+        print(cake_url)
+
+    # Выводим значение 'user_agent', если оно было успешно считано
+    user_agent = conf.get_user_agent()
+    if user_agent:
+        print(user_agent)
