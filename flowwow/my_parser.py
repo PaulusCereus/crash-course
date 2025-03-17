@@ -32,6 +32,10 @@ class MyParser:
         get_shop_url(): Извлекает URL магазина.
         get_all_info(): Собирает всю информацию о продукте и магазине в виде словаря.
         print_product_info(): Выводит собранную информацию из словаря в консоль.
+        get_last_page_number(): Извлекает максимальное количество страниц
+        get_product_links(): Извлекает ссылки на все карточки товаров
+        save_products_info_to_json(): Проходит по всем тортам страницы и загружает данные в файл JSON
+        save_info_to_excel(): Преобразует JSON в Excel
     """
 
     def __init__(self, headless=False):
