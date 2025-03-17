@@ -34,3 +34,12 @@ class MyParser:
         # Инициализация переменных для хранения URL и HTML-кода страницы
         self.url = ""
         self.html_page = ""
+
+    def get_driver(self):
+        """
+        Возвращает текущий экземпляр веб-драйвера.
+
+        Возвращает:
+            my_webdriver.MyWebdriver: Экземпляр веб-драйвера.
+        """
+        return self.__driver
