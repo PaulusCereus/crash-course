@@ -124,3 +124,19 @@ class MyParser:
         except Exception as e:
             print(f"Ошибка при извлечении заголовка страницы: {e}")
             return "Ошибка при извлечении заголовка"
+
+if __name__ == "__main__":
+    # Создаем экземпляр парсера в headless-режиме (без графического интерфейса)
+    my_parser = MyParser(True)
+    
+    # Получаем конфигурацию для извлечения URL
+    conf = config.MyConfig()
+    
+    # Получаем URL для страницы из конфигурации
+    URL = conf.get_cake_url()
+    
+    # Загружаем страницу по указанному URL
+    my_parser.get_page(url=URL)
+    
+    # Выводим заголовок страницы
+    print(f"Заголовок страницы: {my_parser.get_page_title()}")
