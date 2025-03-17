@@ -426,6 +426,29 @@ class MyParser:
         print(f"Название магазина: {info['shop_name']}")
         print("=" * 40)
 
+    def get_last_page_number(self):
+        """
+        Определяет номер последней страницы пагинации.
+
+        Возвращает:
+            int: Номер последней страницы.
+        """
+        try:
+            # Ищем все элементы пагинации (ссылки с классом 'pagination-item')
+            pagination = self.html_page.find_all('a', class_='pagination-item')
+            if pagination:
+                # Берем текст последнего элемента пагинации
+                last_page = pagination[-1].get_text()
+                # Преобразуем текст в число и возвращаем его
+                return int(last_page)
+            else:
+                # Если элементы пагинации не найдены, предполагаем, что страниц одна
+                return 1
+        except Exception as e:
+            # В случае ошибки выводим сообщение и возвращаем 1
+            print(f"Ошибка при определении последней страницы: {e}")
+            return 1
+
 if __name__ == "__main__":
     # Создаем экземпляр парсера в headless-режиме (без графического интерфейса)
     my_parser = MyParser(True)
