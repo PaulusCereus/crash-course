@@ -41,3 +41,12 @@ class MyWebdriver:
         # Запускаем Chrome с установленными опциями
         driver = webdriver.Chrome(options=options)
         return driver
+
+    def get_driver(self):
+        """
+        Получаем экземпляр веб-драйвера.
+
+        Возвращает:
+        webdriver.Chrome: Экземпляр драйвера, который используется для управления браузером.
+        """
+        return self.__driver
