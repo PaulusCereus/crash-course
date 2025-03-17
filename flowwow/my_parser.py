@@ -385,6 +385,32 @@ class MyParser:
             print(f"Ошибка при сборе всей информации: {e}")
             return {}
 
+    def print_product_info(self):
+        """
+        Форматирует и выводит информацию о продукте и магазине в читаемом виде.
+        Этот метод использует данные, собранные методом get_all_info, и выводит их в понятном формате.
+
+        Выводит:
+            str: Читаемая и структурированная информация о продукте и магазине.
+        """
+        info = self.get_all_info()  # Получаем все данные о продукте и магазине
+
+        # Выводим информацию в красивом и структурированном виде
+        print("\nИнформация о продукте и магазине:")
+        print("=" * 40)
+        print(f"URL продукта: {info['product_url']}")
+        print(f"Категория продукта: {info['product_category']}")
+        print(f"Название продукта: {info['product_name']}")
+        print(f"Цена продукта: {info['product_price']}")
+        print(f"Вес продукта: {info['product_weight']}")
+        print(f"Количество людей, добавивших товар: {info['product_added']}")
+        print(f"Рейтинг продукта: {info['product_rating']}")
+        print(f"Количество покупок продукта: {info['product_bought']}")
+        print("-" * 40)
+        print(f"URL магазина: {info['shop_url']}")
+        print(f"Название магазина: {info['shop_name']}")
+        print("=" * 40)
+
 if __name__ == "__main__":
     # Создаем экземпляр парсера в headless-режиме (без графического интерфейса)
     my_parser = MyParser(True)
