@@ -50,3 +50,12 @@ class MyWebdriver:
         webdriver.Chrome: Экземпляр драйвера, который используется для управления браузером.
         """
         return self.__driver
+
+    def open_url(self, url):
+        """
+        Открывает указанный URL в браузере.
+
+        Параметры:
+        url (str): Адрес веб-страницы, которую нужно открыть.
+        """
+        self.get_driver().get(url=url)
