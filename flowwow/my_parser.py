@@ -449,6 +449,24 @@ class MyParser:
             print(f"Ошибка при определении последней страницы: {e}")
             return 1
 
+    def get_product_links(self):
+        """
+        Извлекает все ссылки на карточки товаров с тортами.
+
+        Возвращает:
+            list: Список URL ссылок на карточки товаров.
+        """
+        try:
+            # Находим все элементы <a> с классом 'product-card'
+            product_elements = self.html_page.find_all('a', class_='product-card')
+            # Формируем список ссылок, извлекая атрибут 'href' у каждого элемента, если он присутствует
+            product_links = [element['href'] for element in product_elements if 'href' in element.attrs]
+            return product_links
+        except Exception as e:
+            # В случае ошибки выводим сообщение и возвращаем пустой список
+            print(f"Ошибка при извлечении ссылок на продукты: {e}")
+            return []
+
 if __name__ == "__main__":
     # Создаем экземпляр парсера в headless-режиме (без графического интерфейса)
     my_parser = MyParser(True)
