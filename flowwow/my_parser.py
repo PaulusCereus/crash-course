@@ -584,17 +584,8 @@ class MyParser:
             print(f"Ошибка при сохранении информации в Excel: {e}")
 
 if __name__ == "__main__":
-    # Создаем экземпляр парсера в headless-режиме (без графического интерфейса)
-    my_parser = MyParser(True)
+    # Код для запуска сохранения данных в JSON-формат
+    MyParser.save_products_info_to_json()
     
-    # Получаем конфигурацию для извлечения URL
-    conf = config.MyConfig()
-    
-    # Получаем URL для страницы из конфигурации
-    URL = conf.get_cake_url()
-    
-    # Загружаем страницу по указанному URL
-    my_parser.get_page(url=URL)
-    
-    # Тестируем функцию вывода
-    my_parser.print_product_info()
+    # Код для формирования таблицы по содержимому JSON-файла
+    MyParser.save_info_to_excel()
