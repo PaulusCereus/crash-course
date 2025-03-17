@@ -357,6 +357,34 @@ class MyParser:
             print(f"Ошибка при извлечении URL магазина: {e}")
             return "Ошибка при извлечении URL магазина"
 
+    def get_all_info(self):
+        """
+        Собирает всю информацию о продукте и магазине в виде словаря.
+
+        Возвращает:
+            dict: Словарь с данными о продукте и магазине.
+        """
+        try:
+            # Собираем всю информацию о продукте и магазине в словарь
+            data = {
+                "product_url": self.get_product_url(),
+                'product_category': self.get_product_category(),
+                'product_photo_url': self.get_product_photo_url(),
+                "product_name": self.get_product_name(),
+                "product_price": self.get_product_price(),
+                "product_weight": self.get_product_weight(),
+                "product_added": self.get_product_added(),
+                "product_rating": self.get_product_rating(),
+                "product_bought": self.get_product_bought(),
+                "shop_name": self.get_shop_name(),
+                "shop_url": self.get_shop_url()
+            }
+            return data
+        except Exception as e:
+            # В случае ошибки при сборе всей информации выводим сообщение и возвращаем пустой словарь
+            print(f"Ошибка при сборе всей информации: {e}")
+            return {}
+
 if __name__ == "__main__":
     # Создаем экземпляр парсера в headless-режиме (без графического интерфейса)
     my_parser = MyParser(True)
