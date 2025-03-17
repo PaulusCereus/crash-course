@@ -80,3 +80,12 @@ class MyWebdriver:
         Закрывает браузер и завершает работу драйвера.
         """
         return self.get_driver().quit()
+
+    def take_screenshot(self, file_path):
+        """
+        Делает скриншот страницы и сохраняет его в указанный файл.
+
+        Параметры:
+        file_path (str): Путь к файлу, куда нужно сохранить скриншот.
+        """
+        self.get_driver().save_screenshot(file_path)
