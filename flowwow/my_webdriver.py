@@ -89,3 +89,26 @@ class MyWebdriver:
         file_path (str): Путь к файлу, куда нужно сохранить скриншот.
         """
         self.get_driver().save_screenshot(file_path)
+
+if __name__ == "__main__":
+    """
+    Основная функция программы.
+    
+    Создает экземпляр класса Wd, открывает URL из конфигурационного файла,
+    записывает страницу в файл и делает скриншот страницы.
+    """
+    # Создаем экземпляр класса WebDriver с включенным режимом headless (без GUI)
+    my_webdriver = MyWebdriver(True)
+    
+    # Загружаем конфигурацию и получаем URL для тестирования
+    conf = config.MyConfig()
+    URL = conf.get_cake_url()
+
+    # Открываем URL в браузере
+    my_webdriver.open_url(url=URL)
+    
+    # Делаем скриншот страницы
+    my_webdriver.take_screenshot("flowwow/screen.png")
+    
+    # Закрываем браузер
+    my_webdriver.quit()
