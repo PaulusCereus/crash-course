@@ -52,3 +52,12 @@ class MyParser:
             str: URL текущей веб-страницы.
         """
         return self.url
+
+    def get_html_page(self):
+        """
+        Возвращает HTML-код страницы, полученный после её загрузки.
+
+        Возвращает:
+            str: HTML-код страницы, сохранённый в переменной html_page.
+        """
+        return self.html_page
