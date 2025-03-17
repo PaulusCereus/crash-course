@@ -59,3 +59,12 @@ class MyWebdriver:
         url (str): Адрес веб-страницы, которую нужно открыть.
         """
         self.get_driver().get(url=url)
+
+    def get_page_source(self):
+        """
+        Получаем исходный код текущей страницы.
+
+        Возвращает:
+        str: Исходный код страницы в формате HTML.
+        """
+        return self.get_driver().page_source
