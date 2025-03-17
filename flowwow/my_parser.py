@@ -140,6 +140,15 @@ class MyParser:
             print(f"Ошибка при извлечении категории продукта: {e}")
             return "Ошибка при извлечении категории"
 
+    def get_product_url(self):
+        """
+        Возвращает URL страницы продукта.
+
+        Возвращает:
+            str: URL текущей страницы.
+        """
+        return self.url
+
 if __name__ == "__main__":
     # Создаем экземпляр парсера в headless-режиме (без графического интерфейса)
     my_parser = MyParser(True)
