@@ -424,5 +424,5 @@ if __name__ == "__main__":
     # Загружаем страницу по указанному URL
     my_parser.get_page(url=URL)
     
-    # Выводим заголовок страницы
-    print(f"Заголовок страницы: {my_parser.get_page_title()}")
+    # Тестируем функцию вывода
+    my_parser.print_product_info()
