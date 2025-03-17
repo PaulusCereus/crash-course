@@ -68,3 +68,9 @@ class MyWebdriver:
         str: Исходный код страницы в формате HTML.
         """
         return self.get_driver().page_source
+
+    def close(self):
+        """
+        Закрывает текущую вкладку браузера.
+        """
+        return self.get_driver().close()
