@@ -467,6 +467,72 @@ class MyParser:
             print(f"Ошибка при извлечении ссылок на продукты: {e}")
             return []
 
+    @staticmethod
+    def save_products_info_to_json():
+        """
+        Сохраняет информацию по всем страницам с тортами постепенно в JSON-файл.
+        """
+        try:
+            # Получаем URL шаблона для тортов из конфигурации
+            conf = config.MyConfig()
+            template_cakes_url = conf.get_template_cakes_url()
+            
+            # Создаём экземпляр парсера в headless-режиме
+            cake_parser = MyParser(True)
+            cake_parser.get_page(template_cakes_url)
+            
+            # Определяем номер последней страницы пагинации
+            last_page_number = cake_parser.get_last_page_number()
+            
+            # Путь к файлу, где будет храниться информация о тортах
+            file_path = 'flowwow/cakes.json'
+            
+            # Проверяем, существует ли файл; если нет, создаём его с пустым словарем
+            if not os.path.exists(file_path):
+                with open(file_path, 'w', encoding='utf-8') as f:
+                    json.dump({}, f, ensure_ascii=False, indent=4)
+            
+            # Проходим по всем страницам пагинации
+            for page_num in range(1, last_page_number + 1):
+                # Создаем новый экземпляр парсера для каждой страницы
+                current_cakes_page = MyParser(True)
+                # Формируем URL текущей страницы (например, template URL + номер страницы)
+                page_url = f"{template_cakes_url}{page_num}/"
+                current_cakes_page.get_page(page_url)
+                
+                # Извлекаем ссылки на карточки продуктов с текущей страницы
+                product_links = current_cakes_page.get_product_links()
+                
+                for link in product_links:
+                    # Загружаем текущие данные из JSON-файла
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        all_products_info = json.load(f)
+                    
+                    # Если информация о данном продукте уже существует, пропускаем его
+                    if link in all_products_info:
+                        print(f"Информация о продукте {link} уже существует. Пропускаем.")
+                        continue
+                    
+                    # Создаем экземпляр парсера для загрузки конкретного продукта
+                    current_page = MyParser(True)
+                    current_page.get_page(f"https://flowwow.com{link}")
+                    
+                    # Получаем информацию о продукте с помощью метода get_all_info()
+                    product_info = current_page.get_all_info()
+                    
+                    # Добавляем информацию о продукте в словарь с данными
+                    all_products_info[link] = product_info
+                    
+                    # Перезаписываем JSON-файл с обновленными данными
+                    with open(file_path, 'w', encoding='utf-8') as f:
+                        json.dump(all_products_info, f, ensure_ascii=False, indent=4)
+            
+            print("Информация о продуктах успешно сохранена в cakes.json")
+        
+        except Exception as e:
+            # В случае возникновения ошибки выводим сообщение
+            print(f"Ошибка при сохранении информации о продуктах: {e}")
+
 if __name__ == "__main__":
     # Создаем экземпляр парсера в headless-режиме (без графического интерфейса)
     my_parser = MyParser(True)
