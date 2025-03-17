@@ -149,6 +149,29 @@ class MyParser:
         """
         return self.url
 
+    def get_product_photo_url(self):
+        """
+        Извлекает URL фото продукта.
+
+        Этот метод:
+        - Ищет все изображения с классом "main-image-content is-zoom".
+        - Извлекает атрибут 'src' для первого найденного изображения.
+        
+        Возвращает:
+            str: URL фото продукта.
+        """
+        try:
+            # Ищем все изображения с классом "main-image-content is-zoom"
+            photo_url = self.html_page.find_all("img", class_="main-image-content is-zoom")
+            if photo_url:
+                return photo_url[0]['src']  # Возвращаем ссылку на первое изображение
+            else:
+                return "Фото не найдено"  # Если фото не найдено, возвращаем дефолтное сообщение
+        except Exception as e:
+            # В случае ошибки выводим сообщение и возвращаем дефолтное значение
+            print(f"Ошибка при извлечении фото продукта: {e}")
+            return "Ошибка при извлечении фото"
+
 if __name__ == "__main__":
     # Создаем экземпляр парсера в headless-режиме (без графического интерфейса)
     my_parser = MyParser(True)
