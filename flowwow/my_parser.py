@@ -533,6 +533,56 @@ class MyParser:
             # В случае возникновения ошибки выводим сообщение
             print(f"Ошибка при сохранении информации о продуктах: {e}")
 
+    @staticmethod
+    def save_info_to_excel(json_file='flowwow/cakes.json', excel_file='flowwow/cakes.xlsx'):
+        """
+        Сохраняет информацию из JSON-файла в Excel-таблицу.
+
+        Аргументы:
+            json_file (str): Имя входного JSON-файла.
+            excel_file (str): Имя выходного Excel-файла.
+        """
+        try:
+            # Задаем путь к JSON-файлу с данными о тортах
+            json_file = 'flowwow/cakes.json'
+
+            # Открываем и загружаем данные из JSON-файла
+            with open(json_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+
+            # Преобразуем данные из словаря в список словарей для формирования таблицы
+            data_list = []
+            for key, value in data.items():
+                # Формируем словарь с необходимыми полями
+                product_data = {
+                    'Ссылка на товар': value.get('product_url', ''),
+                    'Категория': value.get('product_category', ''),
+                    'Ссылка на первое фото': value.get('product_photo_url', ''),
+                    'Название': value.get('product_name', ''),
+                    'Цена': value.get('product_price', ''),
+                    'Вес товара': value.get('product_weight', ''),
+                    'Добавили в подборки': value.get('product_added', ''),
+                    'Оценка магазина': value.get('product_rating', ''),
+                    'Покупок': value.get('product_bought', ''),
+                    'Магазин': value.get('shop_name', ''),
+                    'Ссылка на магазин': value.get('shop_url', ''),
+                }
+                data_list.append(product_data)
+
+            # Создаем DataFrame из списка словарей (требуется библиотека pandas)
+            df = pd.DataFrame(data_list)
+
+            # Определяем путь для сохранения Excel-файла
+            excel_file = 'flowwow/cakes.xlsx'
+
+            # Сохраняем DataFrame в Excel-файл с использованием движка openpyxl
+            df.to_excel(excel_file, index=False, engine='openpyxl')
+
+            print(f"Данные успешно сохранены в {excel_file}")
+        except Exception as e:
+            # В случае ошибки выводим сообщение
+            print(f"Ошибка при сохранении информации в Excel: {e}")
+
 if __name__ == "__main__":
     # Создаем экземпляр парсера в headless-режиме (без графического интерфейса)
     my_parser = MyParser(True)
