@@ -74,3 +74,9 @@ class MyWebdriver:
         Закрывает текущую вкладку браузера.
         """
         return self.get_driver().close()
+
+    def quit(self):
+        """
+        Закрывает браузер и завершает работу драйвера.
+        """
+        return self.get_driver().quit()
