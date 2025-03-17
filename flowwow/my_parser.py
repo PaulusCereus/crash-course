@@ -43,3 +43,12 @@ class MyParser:
             my_webdriver.MyWebdriver: Экземпляр веб-драйвера.
         """
         return self.__driver
+
+    def get_url(self):
+        """
+        Возвращает URL текущей страницы.
+
+        Возвращает:
+            str: URL текущей веб-страницы.
+        """
+        return self.url
