@@ -1,2 +1,4 @@
 .venv
 requests/config.ini
+flowwow/config.ini
+*/__pycache__
